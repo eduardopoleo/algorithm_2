@@ -1,0 +1,10 @@
+Main ingredients:
+
+- Reduces problems to subproblems gradually
+- Safe move cuz is consistent with an optimal conditions
+
+Algorithm:
+- Make a greedy choice
+- Prove that the choice is safe
+- Reduce the problem to a subproblem and then you iterate
+
