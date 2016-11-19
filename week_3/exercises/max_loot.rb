@@ -30,10 +30,11 @@ def max_loot(w, items)
 			w_ratio = w / weight
 			new_value = value * w_ratio
 			total_value += new_value
+			# no more available space
 			break
 		end
 	end	
-
+	
 	total_value.round(4)
 end
 

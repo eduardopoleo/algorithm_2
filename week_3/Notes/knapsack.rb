@@ -11,14 +11,15 @@ def knapsack(weight_available, items)
 		if weight_available == 0
 			return [total_value, items_packed] 		
 		end
+
 		index = choose_max_value(items)
 		item = items[index]
 		a = [item[0], weight_available].min
 
-		total_value = total_value + a * item[1]/item[0] # total value in the sack
-		item[1] = item[1] - a # substrack the amount in the items
-		items_packed[index] = items_packed[index] + a # updates the items packed in the list
-		weight_available = weight_available - a # updates the weight available in the sack
+		total_value = total_value + a * item[1]/item[0] 
+		item[1] = item[1] - a 
+		items_packed[index] = items_packed[index] + a 
+		weight_available = weight_available - a 
 	end
 end
 
