@@ -1,18 +1,17 @@
-require_relative './week_2/sum_fib'
-require_relative './week_2/brute_sum_fib'
+require_relative './week_3/exercises/candy_exercise'
 
-n = 0
-diference = 0
-while diference == 0
-	a = brute_sum_fib(n)
-	b = fib(n)
-	puts "diference: #{diference}"
-	diference = a - b
-	break unless diference == 0
+n = 1
+
+while true
+puts "THIS IS n #{n}"
+	result = candy(n)
+	size = result.size 
+	uniq_size = result.uniq.size
+
+	if size != uniq_size
+		puts "THIS IS THE OFFENDER: #{n}"
+	break
+	end
+
 	n += 1
 end
-
-puts "a: #{a}"
-puts "b: #{b}"
-puts "n: #{n}"
-puts "final_diference: #{diference}"
