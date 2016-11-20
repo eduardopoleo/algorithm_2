@@ -10,7 +10,9 @@ def candy(n)
 	summands = []
 	summand = 1
 	previous_summand = 1
-
+	# n
+	# next_n 
+	# labeling makes this exersices easier.
 	while true
 		next_n = n - summand
 
