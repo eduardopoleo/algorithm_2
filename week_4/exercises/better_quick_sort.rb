@@ -15,20 +15,27 @@ def quick_sort(a, l, r)
 end
 
 def partition(a, l, r)
-	pivot = l 
+	pivot = randomized_pivot(l, r)
+
+	swap(a, l, pivot)
 # j will always be one step ahead of the pivot
 	j = l + 1
 
 	for i in l+1..r	
-		if a[i] < a[pivot]
+		if a[i] < a[0]
 			swap(a, i, j)
 			j += 1
 		end
 	end
 
-	swap(a, pivot, j - 1)
+	swap(a, l, j - 1)
 
 	j - 1
+end
+
+def randomized_pivot(l, r)
+	diff = r - l + 1
+	l + rand(diff)
 end
 
 def swap(a,i,j)
@@ -39,5 +46,3 @@ end
 
 a = [6,5,5,3]
 p quick_sort(a, 0, 3)
-
-# STDOUT.write majority(collection, n
