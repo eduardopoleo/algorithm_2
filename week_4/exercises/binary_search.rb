@@ -33,3 +33,8 @@ targets.each do |target|
 end
 
 STDOUT.write result.join(' ')
+
+__END__
+Gotchas:
+Higher bound  (3 + 4) / 2 = 3 so 4 will never be selected
+Lower bound  	from before m = l so the loop will break before trying the lower bound  
