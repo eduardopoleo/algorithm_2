@@ -1,8 +1,8 @@
-require 'pry'
-# lines = STDIN.readlines
+# require 'pry'
+lines = STDIN.readlines
 
-# collection = lines[1].chomp.split(' ').map(&:to_i).sort
-# n = lines[0].chomp.to_i
+collection = lines[1].chomp.split(' ').map(&:to_i).sort
+n = lines[0].chomp.to_i
 
 def quick_sort(a, l, r)
 	if l >= r 
@@ -46,13 +46,17 @@ def three_quick_sort(a, l, r)
 end
 
 def three_way_partition(a, l, r)
-	pivot = a[l]
+	pivot_index = randomized_pivot(l,r)
+	pivot = a[pivot_index]
+
+	swap(a, l, pivot_index)
 
 	i = l + 1 # iterator
-	lt = l # beginning of eq zone 
-	gt = r # end of eq zone
+	lt = l # beginning of eq zone (easy to see as it corresponds to the positions of the pivot initially)
+	gt = r # end of eq zone (we i always is on the edge of the eq zone)
+	# we stop iterating when gt falls into the eq zone
 
-	while i <= gt do
+	while i <= gt do # why does it have to be eq? we will miss one iteration otherwise
 		if a[i] < pivot
 			swap(a, i, lt)
 			i += 1
@@ -64,7 +68,7 @@ def three_way_partition(a, l, r)
 			i += 1
 		end
 	end
-	
+
 	[lt, gt]
 end
 
@@ -79,5 +83,7 @@ def swap(a,i,j)
 	a[j] = temp
 end
 
-a = [5,3,5,3, 11, 40, 5, 7, 4, 15]
-p three_quick_sort(a, 0, 9)
+# a = [5,3,5,3, 11, 40, 5, 7, 4, 15]
+# p three_quick_sort(a, 0, 9)
+
+STDOUT.write three_quick_sort(collection, 0, n-1).join(' ')
