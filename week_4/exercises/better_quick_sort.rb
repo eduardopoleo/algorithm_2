@@ -1,7 +1,7 @@
 # require 'pry'
 lines = STDIN.readlines
 
-collection = lines[1].chomp.split(' ').map(&:to_i).sort
+collection = lines[1].chomp.split(' ').map(&:to_i)
 n = lines[0].chomp.to_i
 
 def quick_sort(a, l, r)

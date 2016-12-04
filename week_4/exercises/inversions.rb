@@ -1,14 +1,18 @@
+lines = STDIN.readlines
+
+collection = lines[1].chomp.split(' ').map(&:to_i)
+
 def merge_sort(a)
 	n = a.length
-
-	return a if n <= 1
+	return [a, 0] if n <= 1
 
 	m = n / 2  
 
-	x = merge_sort(a[0...m])
-	y = merge_sort(a[m...n])
+	x, inversions_x = merge_sort(a[0...m])
+	y, inversions_y = merge_sort(a[m...n])
 
-	join_parts(x, y)
+	result, inversions_final = join_parts(x, y)
+	[result, inversions_x + inversions_y + inversions_final]
 end
 
 def join_parts(x,y)
@@ -23,7 +27,7 @@ def join_parts(x,y)
 		elsif x[0] > y[0]
 			result << y[0]
 			y.delete_at(0)
-			inversions += 1
+			inversions += x.length
 		end
 	end
 
@@ -35,8 +39,10 @@ def join_parts(x,y)
 		result += y
 	end
 
-	result
+	[result, inversions]
 end
 
-a = [5,3,5,3, 11, 40, 5, 7, 4, 15]
-p merge_sort(a)
+# a = [5,3,5,3, 11, 40, 5, 7, 4, 15]
+# b = [2, 3, 9, 2, 9]
+
+STDOUT.write merge_sort(collection)[1]
