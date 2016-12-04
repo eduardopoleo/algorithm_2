@@ -13,8 +13,8 @@ def lotery(points, ranges)
 	points = marked_points(points)
 	ranges = marked_ranges(ranges)
 
-	list = (points + ranges).sort_by { |e| [e[0], e[1]]}
-	
+	list = merge_sort((points + ranges))
+
 	list.each do |e|
 		case e[1]
 		when "l"
@@ -43,6 +43,53 @@ def marked_ranges(ranges)
 	end
 	a
 end
+
+
+def merge_sort(a)
+	n = a.length
+	return a if n <= 1
+
+	m = n / 2  
+
+	x = merge_sort(a[0...m])
+	y = merge_sort(a[m...n])
+
+	join_parts(x, y)
+end
+
+def join_parts(x,y)
+	length = x.length
+
+	result = []
+	while !x.empty? && !y.empty?
+		if x[0][0] == y[0][0]
+			if x[0][1] < y[0][1]
+				result << x[0]
+				x.delete_at(0)
+			else
+				result << y[0]
+				y.delete_at(0)
+			end
+		elsif x[0][0] < y[0][0]
+			result << x[0]
+			x.delete_at(0)
+		else
+			result << y[0]
+			y.delete_at(0)
+		end
+	end
+
+	if !x.empty?
+		result += x
+	end
+
+	if !y.empty?
+		result += y
+	end
+
+	result
+end
+
 
 # p lotery(points, ranges)
 STDOUT.write lotery(points, ranges).join(' ')
