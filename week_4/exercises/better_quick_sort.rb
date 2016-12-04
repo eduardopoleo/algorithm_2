@@ -1,3 +1,4 @@
+require 'pry'
 # lines = STDIN.readlines
 
 # collection = lines[1].chomp.split(' ').map(&:to_i).sort
@@ -22,7 +23,7 @@ def partition(a, l, r)
 	j = l + 1
 
 	for i in l+1..r	
-		if a[i] < a[0]
+		if a[i] < a[l]
 			swap(a, i, j)
 			j += 1
 		end
@@ -31,6 +32,40 @@ def partition(a, l, r)
 	swap(a, l, j - 1)
 
 	j - 1
+end
+
+def three_quick_sort(a, l, r)
+	if l >= r
+		return a
+	end
+
+	lt, gt = three_way_partition(a, l, r)
+
+	three_quick_sort(a, l, lt - 1)
+	three_quick_sort(a, gt + 1, r)
+end
+
+def three_way_partition(a, l, r)
+	pivot = a[l]
+
+	i = l + 1 # iterator
+	lt = l # beginning of eq zone 
+	gt = r # end of eq zone
+
+	while i <= gt do
+		if a[i] < pivot
+			swap(a, i, lt)
+			i += 1
+			lt += 1
+		elsif a[i] > pivot
+			swap(a, i, gt)
+			gt -= 1
+		else
+			i += 1
+		end
+	end
+	
+	[lt, gt]
 end
 
 def randomized_pivot(l, r)
@@ -44,5 +79,5 @@ def swap(a,i,j)
 	a[j] = temp
 end
 
-a = [6,5,5,3]
-p quick_sort(a, 0, 3)
+a = [5,3,5,3, 11, 40, 5, 7, 4, 15]
+p three_quick_sort(a, 0, 9)
