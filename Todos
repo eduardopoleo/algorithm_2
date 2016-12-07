@@ -3,4 +3,5 @@ Learn the gist of why quick sort performance:
 - Why randomized pivots are good.
 - Why it perfoms poorly with sorted arrays 
 - Recolect all exercises and review
+- Implement the closest pair algoritm (Even without understanding the 7 and the delta thing)
 
