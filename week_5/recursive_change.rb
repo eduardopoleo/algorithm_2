@@ -36,4 +36,3 @@ What's it's runtime?
 
 k**n where k is the number of different types of coins and n is the amount of money
 
-
