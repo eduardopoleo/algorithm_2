@@ -23,10 +23,14 @@ coins = [1,5,6]
 
 p dp_change(money, coins)
 __END__
+a[index] = value
+index = amount
+value = #coins
+
 min_num_coins[value] = #coins
 min_num_coins[m - coin] 
-m - coin finds the closest previous value that can fit +1 coin of this denomination.
-It returns the coins needed for that far back value.
+m - coin = index indicating the previous amount that can fit the current denomination coin 
+min_num_coins[m - coin] = #coins already added for the value ^
 
 Runtime O(m*c). For every money value I try to fit all possible coins
 Much better and c**m 
