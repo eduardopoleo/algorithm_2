@@ -27,14 +27,25 @@ def edit_distance_matrix(word1, word2)
 		 matrix[index1][j] = matrix[index1][j+1] + 1
 	end
 
-	p matrix
+	(index1 - 1).downto(0) do |i|
+		(index2 - 1).downto(0) do |j|
+
+			replace = matrix[i + 1][j + 1] + replacement_cost(word1, word2, i, j)
+			insert = matrix[i][j + 1] + 1
+			delete = matrix[i + 1][j] + 1
+
+			matrix[i][j] = [replace, insert, delete].min
+		end
+	end
+
+  matrix 
 end
 
 def replacement_cost(word1, word2, index1, index2)
 	word1[index1] == word2[index2] ? 0 : 1
 end
 
-edit_distance_matrix("cat", "cars")
+p edit_distance_matrix("cat", "cars")[0][0]
 
 __END__
 # the algoritmh is basically fill out the outer border of the matrix
