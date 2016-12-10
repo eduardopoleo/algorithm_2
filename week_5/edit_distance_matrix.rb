@@ -60,11 +60,7 @@ def backtracking(m, string1, string2)
 		min_op = calculate_min(m, i, j)
 
 		if i == l1 - 1 && j == l2 - 1
-			if string1[i] == string2[j]
-				result <<  "#{string1[i]}/#{string2[j]}"
-			else
-				result << "-/#{string2[j]}"
-			end 
+			result <<  "#{string2[j]}/#{string1[i]}"
 			break
 		end
 
@@ -76,7 +72,7 @@ def backtracking(m, string1, string2)
 			result << "-/#{string1[i]}"
 			i += 1
 		when :replace
-			result << "#{string1[i]}/#{string2[j]}"
+			result << "#{string2[j]}/#{string1[i]}"
 			i += 1
 			j += 1
 		end
