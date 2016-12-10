@@ -17,16 +17,18 @@ def edit_distance_matrix(word1, word2)
 		matrix << a
 	end
 
+# we need the starting point in here (m,n)
 	matrix[index1][index2] = replacement_cost(word1, word2, index1, index2)
 
+	# Calculate the initial "L" border of the matrix
 	(index1 - 1).downto(0) do |i|
 		 matrix[i][index2] = matrix[i+1][index2] + 1
 	end
-
 	(index2 - 1).downto(0) do |j|
 		 matrix[index1][j] = matrix[index1][j+1] + 1
 	end
 
+ # we calculate the inner elements using the already existing ones look below.  
 	(index1 - 1).downto(0) do |i|
 		(index2 - 1).downto(0) do |j|
 
@@ -45,11 +47,76 @@ def replacement_cost(word1, word2, index1, index2)
 	word1[index1] == word2[index2] ? 0 : 1
 end
 
-p edit_distance_matrix("cat", "cars")[0][0]
+def backtracking(m, string1, string2)
+	i = 0 
+	j = 0	
+
+	result = []
+
+	l1 = string1.length
+	l2 = string2.length
+
+	while i <= l1 - 1 && j <= l2 - 1
+		min_op = calculate_min(m, i, j)
+
+		if i == l1 - 1 && j == l2 - 1
+			if string1[i] == string2[j]
+				result <<  "#{string1[i]}/#{string2[j]}"
+			else
+				result << "-/#{string2[j]}"
+			end 
+			break
+		end
+
+		case min_op
+		when :delete
+			result << "#{string2[j]}/-"
+			j += 1
+		when :insert
+			result << "-/#{string1[i]}"
+			i += 1
+		when :replace
+			result << "#{string1[i]}/#{string2[j]}"
+			i += 1
+			j += 1
+		end
+	end
+
+	result.join(' ')
+end
+
+def calculate_min(m, i, j)
+	h = {
+		insert: m[i + 1] ?  m[i + 1][j] : nil,
+		delete: m[i] ? m[i][j + 1] : nil,
+		replace: m[i + 1] ? m[i +  1][j + 1] : nil
+	}
+
+	min = 1000
+	min_op = ""
+
+	h.each do |k, v|
+		if v && v <= min
+			min_op = k
+			min = v
+		end
+	end
+
+	min_op
+end
+
+word1 = "distance"
+word2 = "editing"	
+
+m = edit_distance_matrix(word1, word2)
+p m[0][0]
+p m
+p backtracking(m, word1, word2)
 
 __END__
 # the algoritmh is basically fill out the outer border of the matrix
 # cars vs cat. s vs t , s vs at, s vs cat and the other way around
+IMPORTANT
 # inner numbers can be calculated out of them:	
 # diagonal down = replace
 # right = insert 
