@@ -12,6 +12,8 @@ def edit_distance_matrix(word1, word2)
 	index2 = word2_length - 1
 
 	matrix = [] 
+	# This should be backwards for simplicity 
+	# word1:columns, word2:rows
 	for i in 0...word1_length
 		a = Array.new(word2_length) 
 		matrix << a
@@ -60,15 +62,20 @@ def backtracking(m, string1, string2)
 		min_op = calculate_min(m, i, j)
 
 		if i == l1 - 1 && j == l2 - 1
+			# easier to read if we have column:top
 			result <<  "#{string2[j]}/#{string1[i]}"
 			break
 		end
 
 		case min_op
 		when :delete
+			# This means that we erased something is string1
+			# we move foward on string2 but stay on the same letter of string 1 to be compared.
+			# The trick is to decide beforehand what is what
 			result << "#{string2[j]}/-"
 			j += 1
 		when :insert
+		 # this means that we erased something in string2
 			result << "-/#{string1[i]}"
 			i += 1
 		when :replace
