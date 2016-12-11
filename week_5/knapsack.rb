@@ -64,7 +64,7 @@ def knapsack_without_rep(w, items)
 			end
 		end
 	end
-	
+
 	matrix[items_length][w]
 end
 
@@ -74,3 +74,16 @@ items = [[6, 30], [3, 14], [4, 16], [2,9]]
 p knapsack_with_reps(10, items)
 
 p knapsack_without_rep(10, items)
+
+__END__
+
+Final remarks:
+Top-down approach is recursive and tend to calculate lots of similar results over and over
+We can make it faster by memoizing results in a hash table and look them up
+We still have to use more space to store the return adress
+But we do not need to calculate all the solutions if they are not necesary.
+Cuz we tend to iterate over the items used and not over the whole range as we do in the iterative.
+
+Bottom-up approach is iterative
+Goes from small problems to big
+It will calculate all subproblems until it arrives to the required solution
