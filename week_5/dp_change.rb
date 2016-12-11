@@ -25,7 +25,7 @@ p dp_change(money, coins)
 __END__
 a[index] = value
 index:amount
-value:amount coins
+value:amount of coins
 
 min_num_coins[value] = #coins
 min_num_coins[m - coin]  = #coins

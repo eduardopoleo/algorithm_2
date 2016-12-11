@@ -5,16 +5,16 @@
 
 # C= 15 13 33 9 10
 
-# C will be of size 2n - 1 
+# will be of size 2n - 1 
 # => 3 * 2 - 1 = 5
 
 # Brute force
 def multi_pol(a, b, n)
 	product = Array.new(2*n -1) {0}
-	
-	for i in 0...n	
+
+	for i in 0...n
 		for j in 0...n
-			product[i+j] = product[i+j] + a[i] * b[j] 
+			product[i+j] = product[i+j] + a[i] * b[j]
 		end
 	end
 
@@ -42,10 +42,3 @@ b = [5,1,2]
 # todo if required (this is a rather intricate thing, learn only if necesary)
 # O(n^1.58)
 # Actually a good algoritmh to understand would be The fast Fourier Transform
-
-
-
-
-
-
-
